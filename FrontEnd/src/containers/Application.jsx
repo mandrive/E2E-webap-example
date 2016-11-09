@@ -1,9 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-export class Application extends React.Component {
+class Application extends React.Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
     return (
-      <div>Hello!</div>
+      <div>
+        <div>Hello!</div>
+        {this.props.children}
+      </div>
     );
   }
 }
+
+export default connect()(Application);
