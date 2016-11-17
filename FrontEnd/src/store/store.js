@@ -1,24 +1,24 @@
 import { combineReducers, compose, createStore, applyMiddleware } from 'redux';
-import { routerReducer, routerMiddleware } from 'react-router-redux';
+import { routerReducer } from 'react-router-redux';
 import ReduxThunk from 'redux-thunk';
-import { browserHistory } from 'react-router';
+import createLogger from 'redux-logger';
 
 import { PersonsReducers } from './reducers/PersonsReducer';
 
+const logger = createLogger();
 const reducers = {
-	routing: routerReducer,
-	persons: PersonsReducers
-}
+    routing: routerReducer,
+    persons: PersonsReducers
+};
 
 const reducer = combineReducers(reducers);
 
 function configureStore(initialState = {}) {
-	debugger;
-  const store = createStore(reducer, initialState, compose(
-  	applyMiddleware(ReduxThunk)
-  ));
+    const store = createStore(reducer, initialState, compose(
+		applyMiddleware(ReduxThunk, logger)
+	));
 
-  return store;
+    return store;
 }
 
 export const store = configureStore();

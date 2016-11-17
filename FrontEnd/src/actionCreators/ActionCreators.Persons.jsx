@@ -1,21 +1,23 @@
 import * as ACTIONS from './Actions';
+import { ApiClient } from './../api/ApiClient';
 
 export const fetchAllPersons = () => {
-  return (dispatch) => {
-    console.log("I'm dispatching!");
-    dispatch({
-        type: ACTIONS.PERSONS.FETCH_PERSONS_IN_PROGRESS
-    });
-    console.log('one action dispatched');
-    //DO SMTH
-    setTimeout(() => {}, 1000);
+    return (dispatch) => {
+        dispatch({
+            type: ACTIONS.PERSONS.FETCH_PERSONS_IN_PROGRESS
+        });
 
-    console.log('timeout');
-
-    dispatch({
-        type: ACTIONS.PERSONS.FETCH_PERSONS_SUCCESS,
-        persons: [{name: 'test'}]
-    });
-    console.log('second action dispatched');
-  }
-}
+        let apiClient = new ApiClient('http://localhost:3000/persons');
+        apiClient.fetchPersons().then((persons) => {
+            dispatch({
+                type: ACTIONS.PERSONS.FETCH_PERSONS_SUCCESS,
+                persons: persons
+            });
+        }).catch((ex) => {
+            dispatch({
+                type: ACTIONS.PERSONS.FETCH_PERSONS_FAILED,
+                exception: ex
+            });
+        });
+    };
+};

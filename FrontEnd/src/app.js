@@ -1,7 +1,6 @@
 /* Core imports */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'react-redux';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { Provider } from 'react-redux';
@@ -26,4 +25,4 @@ ReactDOM.render(
   document.getElementById('content')
 );
 
-//module.hot.accept();
+module.hot.accept();
