@@ -24,6 +24,4 @@ render(
   document.getElementById('content')
 );
 
-
-
-module.hot.accept();
+if (module.hot) module.hot.accept()

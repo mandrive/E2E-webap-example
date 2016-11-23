@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import {TestComponent} from './TestComponent';
 
 import * as ACTION_CREATORS from './../actionCreators/ActionCreators';
 
@@ -28,9 +29,10 @@ class Home extends React.Component {
 
         return (
             <div>
-                <div>Hello from home</div>
+                <div>Hello from home1233</div>
                 <button type="button" onClick={fetchAllPersons}>FETCH</button>
                 <div>
+                    <TestComponent />
                     <span>Fetched persons:</span>
                     <PersonsList>
                         {allFetchedPersons}

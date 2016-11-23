@@ -7,7 +7,7 @@ export const fetchAllPersons = () => {
             type: ACTIONS.PERSONS.FETCH_PERSONS_IN_PROGRESS
         });
 
-        let apiClient = new ApiClient('http://localhost:3000/persons');
+        let apiClient = new ApiClient('http://localhost:4000/persons');
         apiClient.fetchPersons().then((persons) => {
             dispatch({
                 type: ACTIONS.PERSONS.FETCH_PERSONS_SUCCESS,
