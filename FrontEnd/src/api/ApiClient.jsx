@@ -15,7 +15,7 @@ export class ApiClient {
             }).then((persons) => {
                 return resolve(persons);
             }).catch((ex) => {
-                reject(ex);
+                return reject(ex);
             });
         });
     }

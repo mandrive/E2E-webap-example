@@ -7,12 +7,15 @@ module.exports = {
     debug: true,
     devtool: '#eval-source-map',
     entry: [
+        'react-hot-loader/patch',
         'whatwg-fetch',
+        'webpack/hot/dev-server',
+        'webpack-hot-middleware/client',
         './src/app.js'
     ],
     output: {
-        path: path.join(__dirname, 'dist', 'js'),
-        publicPath: '/',
+        path: path.join(__dirname, 'static'),
+        publicPath: '/static',
         filename: 'all.min.js'
     },
 
@@ -27,8 +30,7 @@ module.exports = {
     },
     module: {
         loaders: [
-            { test: /\.js$/, exclude: /node_modules/, loader: ['babel'], query: { presets: ['es2015', 'stage-0', 'react'] } },
-            { test: /\.jsx$/, exclude: /node_modules/, loader: ['babel'], query: { presets: ['es2015', 'stage-0', 'react'] } }
+            { test: /\.jsx?$/, exclude: /node_modules/, loaders: ['react-hot-loader/webpack', 'babel'] }
         ]
     }
 };

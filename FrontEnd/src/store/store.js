@@ -15,7 +15,8 @@ const reducer = combineReducers(reducers);
 
 function configureStore(initialState = {}) {
     const store = createStore(reducer, initialState, compose(
-		applyMiddleware(ReduxThunk, logger)
+		applyMiddleware(ReduxThunk, logger),
+        window.devToolsExtension ? window.devToolsExtension() : f => f
 	));
 
     return store;

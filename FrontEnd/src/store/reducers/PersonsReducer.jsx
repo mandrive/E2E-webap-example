@@ -29,5 +29,5 @@ export const PersonsReducers = (state = initialState, action) => {
         }
     }
 
-    return initialState;
+    return state;
 };

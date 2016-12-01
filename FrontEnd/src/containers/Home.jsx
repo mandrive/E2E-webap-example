@@ -1,7 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import {TestComponent} from './TestComponent';
 
 import * as ACTION_CREATORS from './../actionCreators/ActionCreators';
+
+class PersonsList extends React.Component {
+    render() {
+        return (
+            <ul>
+                {this.props.children}
+            </ul>
+        )
+    }
+}
 
 class Home extends React.Component {
     constructor(props) {
@@ -13,16 +24,19 @@ class Home extends React.Component {
     render() {
         var fetchAllPersons = this.fetchAllPersons.bind(this);
         var allFetchedPersons  = this.props.persons.map((person) => {
-            return (<span key={person.id}>{person.forename}</span>);
+            return (<li key={person.id}>{person.forename}</li>);
         });
 
         return (
             <div>
-                <div>Hello from home!</div>
+                <div>Hello from home1233</div>
                 <button type="button" onClick={fetchAllPersons}>FETCH</button>
                 <div>
+                    <TestComponent />
                     <span>Fetched persons:</span>
-                    {allFetchedPersons}
+                    <PersonsList>
+                        {allFetchedPersons}
+                    </PersonsList>
                 </div>
             </div>
         );
