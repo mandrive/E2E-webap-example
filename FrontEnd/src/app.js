@@ -16,6 +16,7 @@ import Home from './containers/Home';
 import { Root } from './containers/Root';
 
 const history = syncHistoryWithStore(browserHistory, store);
+const Rx = require('rxjs/Rx');
 
 render(
     <AppContainer>
