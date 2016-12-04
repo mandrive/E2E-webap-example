@@ -1,8 +1,10 @@
 import { Person } from './../Models/Person';
+import Endpoints from './client/Endpoints';
 
 export class ApiClient {
     constructor(url) {
         this.url = url;
+        this.endpoints = new Endpoints(url);
     }
     fetchPersons() {
         return new Promise((resolve, reject) => {
