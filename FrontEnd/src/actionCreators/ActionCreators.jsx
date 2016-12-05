@@ -1,3 +1,3 @@
 'use strict';
 
-export * as PERSONS from './ActionCreators.Persons';
+export * as POSTS from './ActionCreators.Posts';

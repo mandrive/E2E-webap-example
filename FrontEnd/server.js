@@ -21,6 +21,7 @@ browserSync.init({
         ]
     },
     files: [
-        './src/html/*.html'
+        './src/html/*.html',
+        './src/config/__env.js'
     ]
 });
