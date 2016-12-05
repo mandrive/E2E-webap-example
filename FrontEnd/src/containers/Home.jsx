@@ -20,8 +20,12 @@ class Home extends React.Component {
     fetchAllPersons() {
         this.props.dispatch(ACTION_CREATORS.PERSONS.fetchAllPersons());
     }
+    fetchAllPosts() {
+      this.props.dispatch({type:'FETCH_POSTS'});
+    }
     render() {
         var fetchAllPersons = this.fetchAllPersons.bind(this);
+        var fetchAllPosts = this.fetchAllPosts.bind(this);
         var allFetchedPersons  = this.props.persons.map((person) => {
             return (<li key={person.id}>{person.forename}</li>);
         });
@@ -29,13 +33,14 @@ class Home extends React.Component {
         return (
             <div className="magictime swashIn">
                 <div>#Home component</div>
-                <button type="button" onClick={fetchAllPersons}>FETCH</button>
-                <div>
+                <button type="button" onClick={fetchAllPosts}>FETCH POSTS</button>
+                {/*<button type="button" onClick={fetchAllPersons}>FETCH</button>-->
+                <!--<div>
                     <span>Fetched persons:</span>
                     <PersonsList>
                         {allFetchedPersons}
                     </PersonsList>
-                </div>
+                </div>*/}
             </div>
         );
     }

@@ -1,10 +1,18 @@
 import { Person } from './../Models/Person';
-import Endpoints from './client/Endpoints';
+import Endpoints from './client/endpoints/Endpoints';
 
 export class ApiClient {
     constructor(url) {
         this.url = url;
         this.endpoints = new Endpoints(url);
+    }
+    fetchPosts() {
+      return new Promise((resolve, reject) => {
+        resolve([
+          {id: 1, content: 'asdfgh'},
+          {id: 2, content: 'asdfgh1234'}
+        ])
+      });
     }
     fetchPersons() {
         return new Promise((resolve, reject) => {
