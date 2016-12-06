@@ -1,6 +1,8 @@
 let initialState = {
   fetchingPosts: false,
-  posts: []
+  posts: [],
+  newPost: {},
+  addingNewPostInProgress: false
 };
 
 export const PostsReducer = (state = initialState, action) => {
@@ -23,6 +25,26 @@ export const PostsReducer = (state = initialState, action) => {
                     fetchingPosts: false,
                     exception: 'exception!'
                 };
+            case 'ADD_NEW_POST':
+                return {
+                    newPost: {
+                        title: action.post.title,
+                        content: action.post.content
+                    },
+                    addingNewPostInProgress: true,
+                    ...state
+                };
+            case 'ADD_NEW_POST_SUCCEDED':
+                return {
+                    newPost: {},
+                    addingNewPostInProgress: false,
+                    ...state
+                };
+            case 'ADD_NEW_POST_FAILED':
+                return {
+                    ...state,
+                    addingNewPostInProgress: false
+                }
         }
     }
 

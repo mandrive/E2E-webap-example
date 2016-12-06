@@ -1,27 +1,38 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-const  { DOM: { input, select, textarea } } = React
 
 class Editor extends React.Component{
     constructor(props) {
         super(props);
     }
+    submitForm(data) {
+        console.log(data);
+        this.props.dispatch({
+            type: 'ADD_NEW_POST',
+            post: {
+                title: data.title,
+                content: data.content
+            }
+        })
+    }
     render() {
         const { handleSubmit } = this.props;
+        const { submitForm } = this;
+
         return (
             <div>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit(submitForm.bind(this))}>
                     <div className="form-group">
                         <label htmlFor="title">Title</label>
                         <Field name="title" component="input" type="text" className="form-control"/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="postContent">Content</label>
-                        <textarea className="form-control"></textarea>
+                        <label htmlFor="content">Content</label>
+                        <Field name="content" component="textarea" type="textarea" className="form-control"/>
                     </div>
                     <div className="form-group">
-                        <button type="button" className="btn btn-default">Submit</button>
+                        <button type="submit" className="btn btn-primary">Submit</button>
                     </div>
                 </form>
             </div>
