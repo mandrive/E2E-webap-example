@@ -24,7 +24,7 @@ class Home extends React.Component {
         var fetchAllPosts = this.fetchAllPosts.bind(this);
 
         return (
-            <div className="magictime swashIn">
+            <div>
                 <div>#Home component</div>
                 <button type="button" onClick={fetchAllPosts}>FETCH POSTS</button>
             </div>
