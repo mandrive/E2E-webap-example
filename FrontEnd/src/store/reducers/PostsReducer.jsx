@@ -16,7 +16,7 @@ export const PostsReducer = (state = initialState, action) => {
             case 'FETCH_POSTS_SUCCEDED':
                 return {
                     ...state,
-                    posts: action.posts,
+                    posts: [...action.posts],
                     fetchingPosts: false
                 };
             case 'FETCH_POSTS_FAILED':

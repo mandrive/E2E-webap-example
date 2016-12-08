@@ -7,14 +7,13 @@ class Editor extends React.Component{
         super(props);
     }
     submitForm(data) {
-        console.log(data);
         this.props.dispatch({
             type: 'ADD_NEW_POST',
             post: {
                 title: data.title,
                 content: data.content
             }
-        })
+        });
     }
     render() {
         const { handleSubmit } = this.props;
@@ -40,6 +39,8 @@ class Editor extends React.Component{
     }
 }
 
-export default connect()(reduxForm({
+export default connect(state => ({
+    initialValues: state.posts.currentPost
+}))(reduxForm({
     form: 'newPost'
 })(Editor));

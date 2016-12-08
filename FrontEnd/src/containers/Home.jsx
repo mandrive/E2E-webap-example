@@ -3,16 +3,6 @@ import { connect } from 'react-redux';
 
 import * as ACTION_CREATORS from './../actionCreators/ActionCreators';
 
-class PersonsList extends React.Component {
-    render() {
-        return (
-            <ul>
-                {this.props.children}
-            </ul>
-        )
-    }
-}
-
 class Home extends React.Component {
     constructor(props) {
         super(props);
@@ -22,11 +12,22 @@ class Home extends React.Component {
     }
     render() {
         var fetchAllPosts = this.fetchAllPosts.bind(this);
+        var postsList = this.props.posts.map(post => {
+            return(
+                <div key={post.id}>
+                    <span>Id: {post.id}</span><br/>
+                    <span>Title: {post.title}</span><br/>
+                    <span>Content: {post.content}</span>
+                </div>
+            )
+        });
 
         return (
             <div>
-                <div>#Home component</div>
-                <button type="button" onClick={fetchAllPosts}>FETCH POSTS</button>
+                <button type="button" className="btn btn-primary" onClick={fetchAllPosts}>FETCH POSTS</button>
+                <div>
+                    {postsList}
+                </div>
             </div>
         );
     }
