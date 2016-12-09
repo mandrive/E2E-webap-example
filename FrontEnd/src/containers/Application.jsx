@@ -9,10 +9,8 @@ class Application extends React.Component {
     render() {
         return (
             <div>
-              <div className="container">
-                  <Navbar />
-              </div>
-              <div className="jumbotron">
+                <Navbar />
+              <div className="row">
                 <h1>#HELLO</h1>
               </div>
                 {this.props.children}

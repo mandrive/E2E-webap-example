@@ -16,8 +16,7 @@ class Editor extends React.Component{
         });
     }
     render() {
-        const { handleSubmit } = this.props;
-        const { submitForm } = this;
+        const { props: { handleSubmit }, submitForm } = this;
 
         return (
             <div>
