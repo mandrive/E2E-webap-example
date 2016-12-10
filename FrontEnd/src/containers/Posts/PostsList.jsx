@@ -2,8 +2,14 @@ import PostContainer from './PostContainer';
 import React from 'react';
 
 export default class PostsList extends React.Component {
-    editPostHandler(post) {
+    constructor(props, context) {
+        super(props);
+        this.router = context.router;
+    }
+    
+    editPostHandler(id) {
         console.log('Edit post clicked');
+        this.router.push('/editor/' + id);
     }
 
     deletePostHandler(id) {
@@ -25,3 +31,7 @@ export default class PostsList extends React.Component {
         );
     }
 }
+
+PostsList.contextTypes = {
+	router: React.PropTypes.object.isRequired
+};

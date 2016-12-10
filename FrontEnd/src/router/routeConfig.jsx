@@ -8,5 +8,6 @@ export const routeConfig = (
     <Route path="/" component={Application}>
       <IndexRoute component={Home}/>
       <Route path="editor" component={Editor} />
+      <Route path="editor/:id" component={Editor} />
     </Route>
 )
