@@ -17,7 +17,7 @@ export default class PostsEndpoint {
         return new Promise((resolve, reject) => {
             resolve(window.customStorage.posts.filter((item, index) => {
                 return item.id == id;
-            }));
+            })[0]);
         });
     }
     create(post) {

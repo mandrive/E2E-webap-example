@@ -7,7 +7,7 @@ import { reducer as formReducer } from 'redux-form';
 export const RootReducer = combineReducers({
     routing: routerReducer,
     form: formReducer.plugin({
-        newPost: (state, action) => {
+        currentPost: (state, action) => {
             switch(action.type) {
                 case 'ADD_NEW_POST_SUCCEDED':
                 return undefined;

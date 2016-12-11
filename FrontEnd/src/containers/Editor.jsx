@@ -2,7 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
-class Editor extends React.Component{
+@connect(state => ({ initialValues: state.posts.currentPost }))
+@reduxForm({form: 'newPost'})
+export default class Editor extends React.Component{
     constructor(props) {
         super(props);
     }
@@ -11,7 +13,8 @@ class Editor extends React.Component{
             type: 'ADD_NEW_POST',
             post: {
                 title: data.title,
-                content: data.content
+                content: data.content,
+                id: data.id
             }
         });
     }
@@ -37,9 +40,3 @@ class Editor extends React.Component{
         );
     }
 }
-
-export default connect(state => ({
-    initialValues: state.posts.currentPost
-}))(reduxForm({
-    form: 'newPost'
-})(Editor));

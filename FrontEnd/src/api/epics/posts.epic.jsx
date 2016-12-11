@@ -1,5 +1,6 @@
 import * as Rx from 'rxjs';
 import { ApiClient } from './../ApiClient';
+import * as ACTION_CREATORS from './../../actionCreators/ActionCreators'
 
 const apiClient = new ApiClient('http://localhost:3001');
 
@@ -18,4 +19,13 @@ export const addPostEpic = (action$, store) =>
                         type: 'ADD_NEW_POST_SUCCEDED'
                       })).catch((ex) => Rx.Observable.of({
                         type: 'ADD_NEW_POST_FAILED'
+                      })));
+
+export const selectPost = (action$, store) =>
+                    action$.ofType('SELECT_POST_TO_EDIT')
+                    .mergeMap(action => 
+                      Rx.Observable.fromPromise(apiClient.endpoints.posts.getById(action.postId))
+                      .map(ACTION_CREATORS.POSTS.fetchPostSucceded)
+                      .catch((ex) => Rx.Observable.of({
+                        type: 'SELECT_POST_TO_EDIT_FAILED'
                       })));

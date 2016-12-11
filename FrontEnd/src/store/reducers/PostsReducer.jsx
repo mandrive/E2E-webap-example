@@ -36,6 +36,15 @@ export const PostsReducer = (state = initialState, action) => {
                     ...state,
                     addingNewPostInProgress: false
                 }
+            case 'FETCH_POST_SUCCEDED':
+            case 'SELECT_POST_TO_EDIT_SUCCEDED':
+                return {
+                    ...state,
+                    currentPost: Object.assign({}, action.post)
+                }
+            case 'SELECT_POST_TO_EDIT':
+            case 'SELECT_POST_TO_EDIT_FAILED':
+                return state;
         }
     }
 

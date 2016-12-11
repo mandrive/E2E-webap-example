@@ -1,15 +1,20 @@
 import { compose, createStore, applyMiddleware } from 'redux';
 import { combineEpics, createEpicMiddleware  } from 'redux-observable';
 import createLogger from 'redux-logger';
+import ReduxThunk from 'redux-thunk'
+import { browserHistory } from 'react-router';
+import { routerMiddleware } from 'react-router-redux';
 
-import { postsEpic, addPostEpic } from './../api/epics/posts.epic';
+import { postsEpic, addPostEpic, selectPost } from './../api/epics/posts.epic';
 import { RootReducer } from './reducers/RootReducer';
 
 const logger = createLogger();
+const routerMid = routerMiddleware(browserHistory);
 
 export const rootEpic = combineEpics(
   postsEpic,
-  addPostEpic
+  addPostEpic,
+  selectPost
 );
 const epicMiddleware = createEpicMiddleware(rootEpic);
 
@@ -18,7 +23,7 @@ function configureStore(initialState = {}) {
                     RootReducer,
                     initialState,
                     compose(
-		                    applyMiddleware(epicMiddleware, logger),
+		                    applyMiddleware(epicMiddleware, ReduxThunk, routerMid, logger),
                         window.devToolsExtension ? window.devToolsExtension() : f => f
 	                ));
 
