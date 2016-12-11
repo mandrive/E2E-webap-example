@@ -38,7 +38,12 @@ export default class PostsEndpoint {
     }
     update(post) {
         return new Promise((resolve, reject) => {
-            reject();
+            var existingPost = window.customStorage.posts.filter(p => { return p.id == post.id})[0];
+            
+            existingPost.title = post.title;
+            existingPost.content = post.content;
+
+            resolve();
         });
     }
 }

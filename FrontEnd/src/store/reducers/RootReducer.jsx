@@ -10,9 +10,10 @@ export const RootReducer = combineReducers({
         currentPost: (state, action) => {
             switch(action.type) {
                 case 'ADD_NEW_POST_SUCCEDED':
-                return undefined;
+                case 'UPDATE_POST_SUCCEDED':
+                    return undefined;
                 default:
-                return state;
+                    return state;
             }
         }
     }),

@@ -2,7 +2,8 @@ let initialState = {
   fetchingPosts: false,
   posts: [],
   currentPost: {},
-  addingNewPostInProgress: false
+  addingNewPostInProgress: false,
+  updatingPostInProgress: false
 };
 
 export const PostsReducer = (state = initialState, action) => {
@@ -34,6 +35,7 @@ export const PostsReducer = (state = initialState, action) => {
             case 'ADD_NEW_POST_FAILED':
                 return {
                     ...state,
+                    currentPost: {},
                     addingNewPostInProgress: false
                 }
             case 'FETCH_POST_SUCCEDED':
@@ -45,6 +47,19 @@ export const PostsReducer = (state = initialState, action) => {
             case 'SELECT_POST_TO_EDIT':
             case 'SELECT_POST_TO_EDIT_FAILED':
                 return state;
+            case 'UPDATE_POST_IN_PROGRESS':
+                return {
+                    ...state,
+                    updatingPostInProgress: true
+                }
+            case 'UPDATE_POST_FAILED':
+            case 'UPDATE_POST_SUCCEDED':
+                return {
+                    ...state,
+                    currentPost: {},
+                    updatingPostInProgress: false
+                }
+            
         }
     }
 

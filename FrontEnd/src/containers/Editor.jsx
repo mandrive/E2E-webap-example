@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
+import * as ACTION_CREATORS from './../actionCreators/ActionCreators'
 
 @connect(state => ({ initialValues: state.posts.currentPost }))
 @reduxForm({form: 'newPost'})
@@ -10,14 +11,7 @@ export default class Editor extends React.Component{
     }
     submitForm(data) {
         if (data.id) {
-            this.props.dispatch({
-                type: 'ADD_NEW_POST',
-                post: {
-                    title: data.title,
-                    content: data.content,
-                    id: data.id
-                }
-            });
+            this.props.dispatch(ACTION_CREATORS.POSTS.updatePost(data));
         } else {
            this.props.dispatch({
             type: 'ADD_NEW_POST',

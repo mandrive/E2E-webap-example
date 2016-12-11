@@ -34,7 +34,7 @@ export const fetchPostFailed = (ex) => {
 
 export const addNewPost = (post) => {
     return (dispatch) => {
-
+        dispatch(addNewPostInProgress());
     }
 }
 
@@ -45,5 +45,46 @@ export const addNewPostInProgress = () => {
 }
 
 export const addNewPostSucceded = () => {
-    
+    return {
+        type: 'ADD_NEW_POST_SUCCEDED'
+    }
+}
+
+export const addNewPostFailed = () => {
+    return {
+        type: 'ADD_NEW_POST_FAILED'
+    }
+}
+
+export const updatePost = (post) => {
+    return (dispatch) => {
+        dispatch(updatePostInProgress());
+        var apiClient = new ApiClient(window.__env.apiUrl);
+        apiClient.endpoints.posts.update(post)
+        .then(() => {
+            dispatch(updatePostSucceded());
+            dispatch(push('/'));
+        })
+        .catch(() => {
+            dispatch(updatePostFailed());
+        })
+    }
+}
+
+export const updatePostInProgress = () => {
+    return {
+        type: 'UPDATE_POST_IN_PROGRESS'
+    }
+}
+
+export const updatePostSucceded = () => {
+    return {
+        type: 'UPDATE_POST_SUCCEDED'
+    }
+}
+
+export const updatePostFailed = () => {
+    return {
+        type: 'UPDATE_POST_FAILED'
+    }
 }
