@@ -31,3 +31,19 @@ export const fetchPostFailed = (ex) => {
         error: ex
     }
 }
+
+export const addNewPost = (post) => {
+    return (dispatch) => {
+
+    }
+}
+
+export const addNewPostInProgress = () => {
+    return {
+        type: 'ADD_NEW_POST_IN_PROGRESS'
+    }
+}
+
+export const addNewPostSucceded = () => {
+    
+}

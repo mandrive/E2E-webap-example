@@ -9,14 +9,25 @@ export default class Editor extends React.Component{
         super(props);
     }
     submitForm(data) {
-        this.props.dispatch({
+        if (data.id) {
+            this.props.dispatch({
+                type: 'ADD_NEW_POST',
+                post: {
+                    title: data.title,
+                    content: data.content,
+                    id: data.id
+                }
+            });
+        } else {
+           this.props.dispatch({
             type: 'ADD_NEW_POST',
             post: {
                 title: data.title,
                 content: data.content,
                 id: data.id
             }
-        });
+        }); 
+        }
     }
     render() {
         const { props: { handleSubmit }, submitForm } = this;

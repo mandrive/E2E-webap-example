@@ -2,19 +2,18 @@ import PostContainer from './PostContainer';
 import React from 'react';
 import { connect } from 'react-redux';
 
-class PostsList extends React.Component {
+@connect()
+export default class PostsList extends React.Component {
     constructor(props, context) {
         super(props);
         this.router = context.router;
     }
     
     editPostHandler(id) {
-        console.log('Edit post clicked');
         this.props.dispatch({
                 type: 'SELECT_POST_TO_EDIT',
                 postId: id
             });  
-        /*this.router.push('/editor/' + id);*/
     }
 
     deletePostHandler(id) {
@@ -36,9 +35,3 @@ class PostsList extends React.Component {
         );
     }
 }
-
-PostsList.contextTypes = {
-	router: React.PropTypes.object.isRequired
-};
-
-export default connect()(PostsList);
