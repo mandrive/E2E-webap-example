@@ -1,5 +1,7 @@
+import * as ACTIONS from './../../actionCreators/Actions'
+
 let initialState = {
-  fetchingPosts: false,
+  fetchingPostsInProgress: false,
   posts: [],
   currentPost: {},
   addingNewPostInProgress: false,
@@ -9,51 +11,53 @@ let initialState = {
 export const PostsReducer = (state = initialState, action) => {
     if (action && action.type) {
         switch(action.type) {
-            case 'FETCH_POSTS':
+            case ACTIONS.POSTS.FETCH_POSTS:
                 return {
                     ...state,
-                    fetchingPosts: true
+                    fetchingPostsInProgress: true
                 };
-            case 'FETCH_POSTS_SUCCEDED':
+            case ACTIONS.POSTS.FETCH_POSTS_SUCCEDED:
                 return {
                     ...state,
                     posts: [...action.posts],
-                    fetchingPosts: false
+                    fetchingPostsInProgress: false
                 };
-            case 'FETCH_POSTS_FAILED':
+            case ACTIONS.POSTS.FETCH_POSTS_FAILED:
                 return {
                     ...state,
                     fetchingPosts: false,
-                    exception: 'exception!'
+                    exception: Object.assign({}, action.error)
                 };
-            case 'ADD_NEW_POST_SUCCEDED':
+            case ACTIONS.POSTS.ADD_NEW_POST_SUCCEDED:
                 return {
                     currentPost: {},
                     addingNewPostInProgress: false,
                     ...state
                 };
-            case 'ADD_NEW_POST_FAILED':
+            case ACTIONS.POSTS.ADD_NEW_POST_FAILED:
                 return {
                     ...state,
                     currentPost: {},
                     addingNewPostInProgress: false
                 }
-            case 'FETCH_POST_SUCCEDED':
-            case 'SELECT_POST_TO_EDIT_SUCCEDED':
+            case ACTIONS.POSTS.LOAD_SELECTED_POST_SUCCEDED:
                 return {
                     ...state,
                     currentPost: Object.assign({}, action.post)
                 }
-            case 'SELECT_POST_TO_EDIT':
-            case 'SELECT_POST_TO_EDIT_FAILED':
-                return state;
-            case 'UPDATE_POST_IN_PROGRESS':
+            case ACTIONS.POSTS.UPDATE_POST_IN_PROGRESS:
                 return {
                     ...state,
                     updatingPostInProgress: true
                 }
-            case 'UPDATE_POST_FAILED':
-            case 'UPDATE_POST_SUCCEDED':
+            case ACTIONS.POSTS.UPDATE_POST_FAILED:
+                return {
+                    ...state,
+                    currentPost: {},
+                    updatingPostInProgress: false,
+                    error: Object.assign({}, action.error)
+                }
+            case ACTIONS.POSTS.UPDATE_POST_SUCCEDED:
                 return {
                     ...state,
                     currentPost: {},

@@ -1,31 +1,27 @@
 import * as Rx from 'rxjs';
 import { ApiClient } from './../ApiClient';
-import * as ACTION_CREATORS from './../../actionCreators/ActionCreators'
+import * as ACTION_CREATORS from './../../actionCreators/ActionCreators';
+import * as ACTIONS from './../../actionCreators/Actions';
 
-const apiClient = new ApiClient('http://localhost:3001');
+const apiClient = new ApiClient(window.__env.apiUrl);
 
-export const postsEpic = (action$, store) =>
-                    action$.ofType('FETCH_POSTS')
+export const fetchAllPostsEpic = (action$, store) =>
+                    action$.ofType(ACTIONS.POSTS.FETCH_POSTS)
                     .mergeMap(action =>
                       Rx.Observable.fromPromise(apiClient.endpoints.posts.getAll())
-                      .map(posts => ({type: 'FETCH_POSTS_SUCCEDED', posts: posts}))
-                      .takeUntil(action$.ofType('FETCH_POSTS_CANCEL')));
+                      .map(ACTION_CREATORS.POSTS.fetchAllPostsSucceded)
+                      .takeUntil(action$.ofType(ACTIONS.POSTS.FETCH_POSTS_CANCEL)));
 
-export const addPostEpic = (action$, store) =>
-                    action$.ofType('ADD_NEW_POST')
+export const addNewPostEpic = (action$, store) =>
+                    action$.ofType(ACTIONS.POSTS.ADD_NEW_POST)
                     .mergeMap(action =>
                       Rx.Observable.fromPromise(apiClient.endpoints.posts.create(action.post))
-                      .map(id => ({
-                        type: 'ADD_NEW_POST_SUCCEDED'
-                      })).catch((ex) => Rx.Observable.of({
-                        type: 'ADD_NEW_POST_FAILED'
-                      })));
+                      .map(ACTION_CREATORS.POSTS.addNewPostSucceded)
+                      .catch(ACTION_CREATORS.POSTS.addNewPostFailed));
 
-export const selectPost = (action$, store) =>
-                    action$.ofType('SELECT_POST_TO_EDIT')
+export const selectPostToEditEpic = (action$, store) =>
+                    action$.ofType(ACTIONS.POSTS.SELECT_POST_TO_EDIT)
                     .mergeMap(action => 
                       Rx.Observable.fromPromise(apiClient.endpoints.posts.getById(action.postId))
-                      .map(ACTION_CREATORS.POSTS.fetchPostSucceded)
-                      .catch((ex) => Rx.Observable.of({
-                        type: 'SELECT_POST_TO_EDIT_FAILED'
-                      })));
+                      .map(ACTION_CREATORS.POSTS.loadSelectedPostSucceded)
+                      .catch(ACTION_CREATORS.POSTS.loadSelectedPostFailed));

@@ -1,23 +1,26 @@
 import { ApiClient } from './../api/ApiClient';
 import { push } from 'react-router-redux';
+import * as ACTIONS from './Actions';
 
-export const fetchPost = (id) => {
-    return (dispatch) => {
-        var apiClient = new ApiClient(window.__env.apiUrl);
-        apiClient.endpoints.posts.getById(id)
-        .then(post => {
-            dispatch(fetchPostSucceded(post));
-        }).catch((ex) => {
-            dispatch(fetchPostFailed(ex));
-        });
+export const fetchAllPostsSucceded = (posts) => {
+    return {
+        type: ACTIONS.POSTS.FETCH_POSTS_SUCCEDED,
+        posts: posts
     }
 }
 
-export const fetchPostSucceded = (post) => {
+export const fetchAllPostsFailed = (ex) => {
+    return {
+        type: ACTIONS.POSTS.FETCH_POSTS_FAILED,
+        error: ex
+    }
+}
+
+export const loadSelectedPostSucceded = (post) => {
     return (dispatch) => {
 
         dispatch({
-            type: 'FETCH_POST_SUCCEDED',
+            type: ACTIONS.POSTS.LOAD_SELECTED_POST_SUCCEDED,
             post: post
         });
 
@@ -25,9 +28,9 @@ export const fetchPostSucceded = (post) => {
     }
 }
 
-export const fetchPostFailed = (ex) => {
+export const loadSelectedPostFailed = (ex) => {
     return {
-        type: 'FETCH_POST_FAILED',
+        type: ACTIONS.POSTS.LOAD_SELECTED_POST_FAILED,
         error: ex
     }
 }
@@ -40,19 +43,21 @@ export const addNewPost = (post) => {
 
 export const addNewPostInProgress = () => {
     return {
-        type: 'ADD_NEW_POST_IN_PROGRESS'
+        type: ACTIONS.POSTS.ADD_NEW_POST_IN_PROGRESS
     }
 }
 
-export const addNewPostSucceded = () => {
-    return {
-        type: 'ADD_NEW_POST_SUCCEDED'
+export const addNewPostSucceded = (id) => {
+    return (dispatch) => {
+        dispatch({type: ACTIONS.POSTS.ADD_NEW_POST_SUCCEDED});
+        dispatch(push('/'));
     }
 }
 
-export const addNewPostFailed = () => {
+export const addNewPostFailed = (ex) => {
     return {
-        type: 'ADD_NEW_POST_FAILED'
+        type: ACTIONS.POSTS.ADD_NEW_POST_FAILED,
+        error: ex
     }
 }
 
@@ -73,18 +78,18 @@ export const updatePost = (post) => {
 
 export const updatePostInProgress = () => {
     return {
-        type: 'UPDATE_POST_IN_PROGRESS'
+        type: ACTIONS.POSTS.UPDATE_POST_IN_PROGRESS
     }
 }
 
 export const updatePostSucceded = () => {
     return {
-        type: 'UPDATE_POST_SUCCEDED'
+        type: ACTIONS.POSTS.UPDATE_POST_SUCCEDED
     }
 }
 
 export const updatePostFailed = () => {
     return {
-        type: 'UPDATE_POST_FAILED'
+        type: ACTIONS.POSTS.UPDATE_POST_FAILED
     }
 }
