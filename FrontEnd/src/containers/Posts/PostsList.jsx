@@ -1,19 +1,16 @@
 import PostContainer from './PostContainer';
 import React from 'react';
 import { connect } from 'react-redux';
+import * as ACTION_CREATORS from './../../actionCreators/ActionCreators';
 
 @connect()
 export default class PostsList extends React.Component {
-    constructor(props, context) {
+    constructor(props) {
         super(props);
-        this.router = context.router;
     }
     
     editPostHandler(id) {
-        this.props.dispatch({
-                type: 'SELECT_POST_TO_EDIT',
-                postId: id
-            });  
+        this.props.dispatch(ACTION_CREATORS.POSTS.selectPostToEdit(id));  
     }
 
     deletePostHandler(id) {

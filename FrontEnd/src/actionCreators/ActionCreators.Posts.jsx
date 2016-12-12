@@ -2,6 +2,25 @@ import { ApiClient } from './../api/ApiClient';
 import { push } from 'react-router-redux';
 import * as ACTIONS from './Actions';
 
+
+/* actions handled by epics */
+
+const addNewPostEpicMessage = (post) => {
+    return {
+        type: ACTIONS.POSTS.ADD_NEW_POST_EPIC_MESSAGE,
+        post: post
+    }
+}
+
+const selectPostToEditEpicMessage = (id) => {
+    return {
+        type: ACTIONS.POSTS.SELECT_POST_TO_EDIT_EPIC_MESSAGE,
+        id: id
+    }
+}
+
+/* normal action creators */
+
 export const fetchAllPostsSucceded = (posts) => {
     return {
         type: ACTIONS.POSTS.FETCH_POSTS_SUCCEDED,
@@ -32,13 +51,6 @@ export const loadSelectedPostFailed = (ex) => {
     return {
         type: ACTIONS.POSTS.LOAD_SELECTED_POST_FAILED,
         error: ex
-    }
-}
-
-const addNewPostEpicMessage = (post) => {
-    return {
-        type: ACTIONS.POSTS.ADD_NEW_POST,
-        post: post
     }
 }
 
@@ -99,5 +111,18 @@ export const updatePostSucceded = () => {
 export const updatePostFailed = () => {
     return {
         type: ACTIONS.POSTS.UPDATE_POST_FAILED
+    }
+}
+
+export const selectPostToEdit = (id) => {
+    return (dispatch) => {
+        dispatch(loadSelectedPostToEditInProgress());
+        dispatch(selectPostToEditEpicMessage(id));
+    }
+}
+
+export const loadSelectedPostToEditInProgress = () => {
+    return {
+        type: ACTIONS.POSTS.LOAD_SELECTED_POST_IN_PROGRESS
     }
 }

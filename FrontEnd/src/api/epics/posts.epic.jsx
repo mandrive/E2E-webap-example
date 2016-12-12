@@ -13,15 +13,15 @@ export const fetchAllPostsEpic = (action$, store) =>
                       .takeUntil(action$.ofType(ACTIONS.POSTS.FETCH_POSTS_CANCEL)));
 
 export const addNewPostEpic = (action$, store) =>
-                    action$.ofType(ACTIONS.POSTS.ADD_NEW_POST)
+                    action$.ofType(ACTIONS.POSTS.ADD_NEW_POST_EPIC_MESSAGE)
                     .mergeMap(action =>
                       Rx.Observable.fromPromise(apiClient.endpoints.posts.create(action.post))
                       .map(ACTION_CREATORS.POSTS.addNewPostSucceded)
                       .catch(ACTION_CREATORS.POSTS.addNewPostFailed));
 
 export const selectPostToEditEpic = (action$, store) =>
-                    action$.ofType(ACTIONS.POSTS.SELECT_POST_TO_EDIT)
+                    action$.ofType(ACTIONS.POSTS.SELECT_POST_TO_EDIT_EPIC_MESSAGE)
                     .mergeMap(action => 
-                      Rx.Observable.fromPromise(apiClient.endpoints.posts.getById(action.postId))
+                      Rx.Observable.fromPromise(apiClient.endpoints.posts.getById(action.id))
                       .map(ACTION_CREATORS.POSTS.loadSelectedPostSucceded)
                       .catch(ACTION_CREATORS.POSTS.loadSelectedPostFailed));

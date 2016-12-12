@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { IndexLink  } from 'react-router';
 
 export default class Navbar extends React.Component {
   render() {
@@ -12,11 +12,11 @@ export default class Navbar extends React.Component {
             <div className="collapse navbar-toggleable-xs">
                 <a className="navbar-brand">#Hello</a>
                 <ul className="nav navbar-nav">
-                    <li className="nav-item active waves-effect waves-light">
-                        <Link to="/" className="nav-link">HOME</Link>
+                    <li className="nav-item waves-effect waves-light">
+                        <IndexLink to="/" className="nav-link" activeClassName="active">HOME</IndexLink>
                     </li>
                     <li className="nav-item waves-effect waves-light">
-                        <Link to="/editor" className="nav-link">EDITOR</Link>
+                        <IndexLink to="/editor" className="nav-link" activeClassName="active">EDITOR</IndexLink>
                     </li>
                 </ul>
             </div>
@@ -24,10 +24,10 @@ export default class Navbar extends React.Component {
         <div className="collapse" id="exCollapsingNavbar">
             <ul className="nav navbar-nav">
                     <li className="nav-item active waves-effect waves-light">
-                        <Link to="/" className="nav-link">HOME</Link>
+                        <IndexLink to="/" className="nav-link">HOME</IndexLink>
                     </li>
                     <li className="nav-item waves-effect waves-light">
-                        <Link to="/editor" className="nav-link">EDITOR</Link>
+                        <IndexLink to="/editor" className="nav-link">EDITOR</IndexLink>
                     </li>
                 </ul>
         </div>
