@@ -35,9 +35,17 @@ export const loadSelectedPostFailed = (ex) => {
     }
 }
 
+const addNewPostEpicMessage = (post) => {
+    return {
+        type: ACTIONS.POSTS.ADD_NEW_POST,
+        post: post
+    }
+}
+
 export const addNewPost = (post) => {
     return (dispatch) => {
         dispatch(addNewPostInProgress());
+        dispatch(addNewPostEpicMessage(post));
     }
 }
 

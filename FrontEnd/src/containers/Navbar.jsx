@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 export default class Navbar extends React.Component {
   render() {
     return (
-      <nav className="navbar navbar-dark bg-primary">
+      <nav className="navbar navbar-dark bg-primary" style={{marginBottom: 30 }}>
         <button className="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
             <i className="fa fa-bars"></i>
         </button>

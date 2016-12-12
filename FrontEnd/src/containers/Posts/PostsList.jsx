@@ -29,7 +29,7 @@ export default class PostsList extends React.Component {
         });
 
         return (
-            <div className="posts-list container">
+            <div className="posts-list">
                 {posts}
             </div>
         );

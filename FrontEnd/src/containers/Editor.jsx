@@ -13,15 +13,8 @@ export default class Editor extends React.Component{
         if (data.id) {
             this.props.dispatch(ACTION_CREATORS.POSTS.updatePost(data));
         } else {
-           this.props.dispatch({
-            type: 'ADD_NEW_POST',
-            post: {
-                title: data.title,
-                content: data.content,
-                id: data.id
-            }
-        }); 
-        }
+            this.props.dispatch(ACTION_CREATORS.POSTS.addNewPost(data));
+        } 
     }
     render() {
         const { props: { handleSubmit }, submitForm } = this;

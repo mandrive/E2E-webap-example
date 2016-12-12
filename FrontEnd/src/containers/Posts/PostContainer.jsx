@@ -5,9 +5,9 @@ export default class PostContainer extends React.Component {
     render() {
         const { title, content, id } = this.props.post;
         return(
-            <div className="post-container row col-lg-12">
+            <div className="post-container">
                 <PostActionBar postId={id} onEdit={this.props.onEdit} onDelete={this.props.onDelete} />
-                <div className="row">
+                <div>
                     <h1>{title}</h1>
                     <p>{content}</p>
                 </div>
