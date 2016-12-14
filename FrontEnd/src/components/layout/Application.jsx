@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Navbar from './Navbar';
+import Navbar from './../navigation/Navbar';
 
 @connect()
 export default class Application extends React.Component {

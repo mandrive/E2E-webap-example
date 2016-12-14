@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import * as ACTION_CREATORS from './../actionCreators/ActionCreators';
-import PostsList from './Posts/PostsList';
+import * as ACTION_CREATORS from './../../actionCreators/ActionCreators';
+import PostsList from './../posts/PostsList';
 
 @connect(state => ({ posts: state.posts.posts}))
 export default class Home extends React.Component {

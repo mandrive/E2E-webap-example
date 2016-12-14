@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import * as ACTION_CREATORS from './../actionCreators/ActionCreators'
+import * as ACTION_CREATORS from './../../actionCreators/ActionCreators'
 
 @connect(state => ({ initialValues: state.posts.currentPost }))
 @reduxForm({form: 'newPost'})

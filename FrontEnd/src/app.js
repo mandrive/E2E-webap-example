@@ -11,9 +11,9 @@ import { AppContainer } from 'react-hot-loader';
 import { store } from './store/store.js';
 
 /* Containers and components imports */
-import Application from './containers/Application';
-import Home from './containers/Home';
-import { Root } from './containers/Root';
+import Application from './components/layout/Application';
+import Home from './components/layout/Home';
+import { Root } from './components/layout/Root';
 
 const history = syncHistoryWithStore(browserHistory, store);
 

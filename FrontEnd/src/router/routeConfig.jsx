@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
-import Application from './../containers/Application';
-import Home from './../containers/Home';
-import Editor from './../containers/Editor';
+import Application from './../components/layout/Application';
+import Home from './../components/layout/Home';
+import Editor from './../components/posts/Editor';
 import { reset } from 'redux-form';
 
 const resetForm = (store, dispatch) => {
