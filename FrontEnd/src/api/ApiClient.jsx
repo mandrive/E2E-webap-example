@@ -1,6 +1,5 @@
-import { Person } from './../Models/Person';
-import Endpoints from './client/endpoints/Endpoints';
-import './client/storage';
+import Endpoints from './ApiClient.Endpoints';
+import './CustomStorage';
 
 export class ApiClient {
     constructor(url) {

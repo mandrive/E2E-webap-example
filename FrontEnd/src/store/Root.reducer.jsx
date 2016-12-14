@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
-import { PostsReducer } from './PostsReducer';
+import { PostsReducer } from './Post.reducer';
 import { reducer as formReducer } from 'redux-form';
-import * as ACTIONS from './../../actionCreators/Actions';
+import * as ACTIONS from './../actionCreators/Actions';
 
 export const RootReducer = combineReducers({
     routing: routerReducer,
