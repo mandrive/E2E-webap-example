@@ -33,7 +33,10 @@ export default class PostsEndpoint {
     }
     delete(id) {
         return new Promise((resolve, reject) => {
-            reject();
+            var index = window.customStorage.posts.findIndex(p => { return p.id == id});
+            window.customStorage.posts = [...window.customStorage.posts.slice(0, index), ... window.customStorage.posts.slice(index+1)]
+
+            resolve(id);
         });
     }
     update(post) {

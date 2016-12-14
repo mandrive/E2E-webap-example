@@ -5,7 +5,7 @@ import ReduxThunk from 'redux-thunk'
 import { browserHistory } from 'react-router';
 import { routerMiddleware } from 'react-router-redux';
 
-import { fetchAllPostsEpic, addNewPostEpic, selectPostToEditEpic } from './../api/epics/posts.epic';
+import { fetchAllPostsEpic, addNewPostEpic, selectPostToEditEpic, updatePostEpic, deletePostEpic } from './../api/epics/posts.epic';
 import { RootReducer } from './reducers/RootReducer';
 
 const logger = createLogger();
@@ -14,7 +14,9 @@ const routerMid = routerMiddleware(browserHistory);
 export const rootEpic = combineEpics(
   fetchAllPostsEpic,
   addNewPostEpic,
-  selectPostToEditEpic
+  selectPostToEditEpic,
+  updatePostEpic,
+  deletePostEpic
 );
 const epicMiddleware = createEpicMiddleware(rootEpic);
 

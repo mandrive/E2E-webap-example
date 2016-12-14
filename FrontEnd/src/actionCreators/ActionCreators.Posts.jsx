@@ -19,6 +19,20 @@ const selectPostToEditEpicMessage = (id) => {
     }
 }
 
+const updatePostEpicMessage = (post) => {
+    return {
+        type: ACTIONS.POSTS.UPDATE_POST_EPIC_MESSAGE,
+        post: post
+    }
+} 
+
+const deletePostEpicMessage = (id) => {
+    return {
+        type: ACTIONS.POSTS.DELETE_POST_EPIC_MESSAGE,
+        id: id
+    }
+}
+
 /* normal action creators */
 
 export const fetchAllPostsSucceded = (posts) => {
@@ -84,15 +98,7 @@ export const addNewPostFailed = (ex) => {
 export const updatePost = (post) => {
     return (dispatch) => {
         dispatch(updatePostInProgress());
-        var apiClient = new ApiClient(window.__env.apiUrl);
-        apiClient.endpoints.posts.update(post)
-        .then(() => {
-            dispatch(updatePostSucceded());
-            dispatch(push('/'));
-        })
-        .catch(() => {
-            dispatch(updatePostFailed());
-        })
+        dispatch(updatePostEpicMessage(post));
     }
 }
 
@@ -103,8 +109,9 @@ export const updatePostInProgress = () => {
 }
 
 export const updatePostSucceded = () => {
-    return {
-        type: ACTIONS.POSTS.UPDATE_POST_SUCCEDED
+    return (dispatch) => {
+        dispatch({type: ACTIONS.POSTS.UPDATE_POST_SUCCEDED})
+        dispatch(push('/'));
     }
 }
 
@@ -124,5 +131,31 @@ export const selectPostToEdit = (id) => {
 export const loadSelectedPostToEditInProgress = () => {
     return {
         type: ACTIONS.POSTS.LOAD_SELECTED_POST_IN_PROGRESS
+    }
+}
+
+export const deletePostFailed = () => {
+    return {
+        type: ACTIONS.POSTS.DELETE_POST_FAILED
+    }
+}
+
+export const deletePostSucceded = (id) => {
+    return {
+        type: ACTIONS.POSTS.DELETE_POST_SUCCEDED,
+        id: id
+    }
+}
+
+export const deletePostInProgress = () => {
+    return {
+        type: ACTIONS.POSTS.DELETE_POST_IN_PROGRESS
+    }
+}
+
+export const deletePost = (id) => {
+    return (dispatch) => {
+        dispatch(deletePostInProgress());
+        dispatch(deletePostEpicMessage(id));
     }
 }

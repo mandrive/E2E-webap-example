@@ -14,7 +14,7 @@ export default class PostsList extends React.Component {
     }
 
     deletePostHandler(id) {
-        console.log('Delete post clicked');
+        this.props.dispatch(ACTION_CREATORS.POSTS.deletePost(id));
     }
 
     render() {

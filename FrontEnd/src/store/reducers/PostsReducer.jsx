@@ -63,6 +63,15 @@ export const PostsReducer = (state = initialState, action) => {
                     currentPost: {},
                     updatingPostInProgress: false
                 }
+            case ACTIONS.POSTS.DELETE_POST_SUCCEDED:
+                var removedIndex = state.posts.findIndex(p => { return p.id == action.id});
+                return {
+                    ...state,
+                    posts: [
+                        ...state.posts.slice(0, removedIndex),
+                        ...state.posts.slice(removedIndex+1)
+                        ]
+                }
             
         }
     }
