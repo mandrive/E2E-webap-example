@@ -15,25 +15,25 @@ export const PostsReducer = (state = initialState, action) => {
                 return {
                     ...state,
                     fetchingPostsInProgress: true
-                };
+                }
             case ACTIONS.POSTS.FETCH_POSTS_SUCCEDED:
                 return {
                     ...state,
                     posts: [...action.posts],
                     fetchingPostsInProgress: false
-                };
+                }
             case ACTIONS.POSTS.FETCH_POSTS_FAILED:
                 return {
                     ...state,
                     fetchingPosts: false,
                     exception: Object.assign({}, action.error)
-                };
+                }
             case ACTIONS.POSTS.ADD_NEW_POST_SUCCEDED:
                 return {
                     currentPost: {},
                     addingNewPostInProgress: false,
                     ...state
-                };
+                }
             case ACTIONS.POSTS.ADD_NEW_POST_FAILED:
                 return {
                     ...state,
