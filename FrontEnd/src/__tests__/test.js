@@ -32,13 +32,14 @@ const fetchFooEpic = (action$, store, call = indirect.call) =>
 
 const expectEpic = (epic, { expected, action, response, callArgs, store }) => {
   const testScheduler = new TestScheduler((actual, expected) => {
-    console.log(actual, expected);
+    //console.log(actual, expected);
     expect(actual).to.deep.equal(expected);
   });
-  
+
   const action$ = new ActionsObservable(
     testScheduler.createHotObservable(...action)
   );
+
   const responseSubs = '^!';
   const response$ = testScheduler.createColdObservable(...response);
   const call = sinon.stub().returns(response$);
@@ -46,16 +47,15 @@ const expectEpic = (epic, { expected, action, response, callArgs, store }) => {
   const test$ = epic(action$, store, call);
   testScheduler.expectObservable(test$).toBe(...expected);
   testScheduler.flush();
-  
+
   expect(call.calledOnce).to.be.true;
-  expect(call.calledWithExactly(...callArgs)).to.be.true;
 
   testScheduler.expectSubscriptions(response$.subscriptions).toBe(responseSubs);
 };
 
 describe('fetchFooEpic', () => {
   it('calls the correct API', () => {
-    const response = { posts: [] };
+    const response = [];
 
     expectEpic(fetchAllPostsEpic, {
       expected: ['-a|', {
@@ -70,33 +70,28 @@ describe('fetchFooEpic', () => {
     });
   });
 
-  /*it('handles errors correctly', () => {
-    const response = { message: 'BAD STUFF' };
-
-    expectEpic(fetchFooEpic, {
+  it('handles errors correctly', () => {
+    expectEpic(fetchAllPostsEpic, {
       expected: ['-(a|)', {
-        a: { type: 'FETCH_FOO_REJECTED', payload: response, error: true }
+        a: { type: 'FETCH_POSTS_FAILED', error: true }
       }],
       action: ['(a|)', {
-        a: { type: 'FETCH_FOO', payload: { id: 123 } }
+        a: { type: 'FETCH_POSTS' }
       }],
-      response: ['-#', null, { xhr: { response } }],
-      callArgs: [api.fetchFoo, 123]
+      response: ['-#'],
     });
   });
 
   it('handles cancellation correctly', () => {
-    expectEpic(fetchFooEpic, {
+    expectEpic(fetchAllPostsEpic, {
       expected: ['--|'],
       action: ['ab|', {
-        a: { type: 'FETCH_FOO', payload: { id: 123 } },
-        b: { type: 'FETCH_FOO_CANCELLED' }
+        a: { type: 'FETCH_POSTS' },
+        b: { type: 'FETCH_POSTS_CANCEL' }
       }],
       response: ['-a|', {
         a: { message: 'SHOULD_NOT_EMIT_THIS' }
       }],
-      callArgs: [api.fetchFoo, 123]
     });
-  });*/
-
+  });
 });

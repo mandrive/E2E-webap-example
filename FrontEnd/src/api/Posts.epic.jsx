@@ -6,12 +6,14 @@ import root from 'window-or-global'
 
 const apiClient = new ApiClient(root.__env.apiUrl);
 
-export const fetchAllPostsEpic = (action$, store) =>
+export const fetchAllPostsEpic = (action$, store, call = indirect.call) =>
                     action$.ofType(ACTIONS.POSTS.FETCH_POSTS)
-                    .mergeMap(action =>
-                      Rx.Observable.fromPromise(apiClient.endpoints.posts.getAll())
-                      .map(ACTION_CREATORS.POSTS.fetchAllPostsSucceded)
-                      .takeUntil(action$.ofType(ACTIONS.POSTS.FETCH_POSTS_CANCEL)));
+                      .mergeMap(action =>
+                        call(Rx.Observable.fromPromise(apiClient.endpoints.posts.getAll()))
+                          .takeUntil(action$.ofType(ACTIONS.POSTS.FETCH_POSTS_CANCEL))
+                          .map(ACTION_CREATORS.POSTS.fetchAllPostsSucceded)
+                          .catch(error => Rx.Observable.of({ type: ACTIONS.POSTS.FETCH_POSTS_FAILED, error: true }))
+                      );
 
 export const addNewPostEpic = (action$, store) =>
                     action$.ofType(ACTIONS.POSTS.ADD_NEW_POST_EPIC_MESSAGE)
