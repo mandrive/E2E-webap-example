@@ -7,6 +7,7 @@ import './../api/CustomStorage';
 import { fetchAllPostsEpic } from './../api/Posts.epic';
 import * as ACTIONS from './../actionCreators/Actions';
 import * as Rx from 'rxjs';
+const { expect } = chai;
 var sinon = require('sinon');
 const { TestScheduler } = Rx;
 

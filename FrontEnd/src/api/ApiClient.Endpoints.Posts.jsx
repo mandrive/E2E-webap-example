@@ -1,3 +1,5 @@
+import root from 'window-or-global'
+
 export default class PostsEndpoint {
     constructor(url) {
         this.Url = url;
@@ -9,21 +11,22 @@ export default class PostsEndpoint {
         return this.Url + '/' + endpointUrlSuffix();
     }
     getAll() {
+        console.log("GETTING ALL");
         return new Promise((resolve, reject) => {
-            resolve(window.customStorage.posts);
+            resolve(root.customStorage.posts);
         });
     }
     getById(id) {
         return new Promise((resolve, reject) => {
-            resolve(window.customStorage.posts.filter((item, index) => {
+            resolve(root.customStorage.posts.filter((item, index) => {
                 return item.id == id;
             })[0]);
         });
     }
     create(post) {
         return new Promise((resolve, reject) => {
-            var newPostId = window.customStorage.posts.length + 1; 
-            window.customStorage.posts.push({
+            var newPostId = root.customStorage.posts.length + 1; 
+            root.customStorage.posts.push({
                 ...post,
                 id: newPostId
             });
@@ -33,15 +36,15 @@ export default class PostsEndpoint {
     }
     delete(id) {
         return new Promise((resolve, reject) => {
-            var index = window.customStorage.posts.findIndex(p => { return p.id == id});
-            window.customStorage.posts = [...window.customStorage.posts.slice(0, index), ... window.customStorage.posts.slice(index+1)]
+            var index = root.customStorage.posts.findIndex(p => { return p.id == id});
+            root.customStorage.posts = [...root.customStorage.posts.slice(0, index), ... root.customStorage.posts.slice(index+1)]
 
             resolve(id);
         });
     }
     update(post) {
         return new Promise((resolve, reject) => {
-            var existingPost = window.customStorage.posts.filter(p => { return p.id == post.id})[0];
+            var existingPost = root.customStorage.posts.filter(p => { return p.id == post.id})[0];
             
             existingPost.title = post.title;
             existingPost.content = post.content;

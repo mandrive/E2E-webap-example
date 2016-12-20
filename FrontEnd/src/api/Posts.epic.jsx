@@ -2,8 +2,9 @@ import * as Rx from 'rxjs';
 import { ApiClient } from './ApiClient';
 import * as ACTION_CREATORS from './../actionCreators/ActionCreators';
 import * as ACTIONS from './../actionCreators/Actions';
+import root from 'window-or-global'
 
-const apiClient = new ApiClient(window.__env.apiUrl);
+const apiClient = new ApiClient(root.__env.apiUrl);
 
 export const fetchAllPostsEpic = (action$, store) =>
                     action$.ofType(ACTIONS.POSTS.FETCH_POSTS)

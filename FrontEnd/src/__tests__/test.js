@@ -1,3 +1,6 @@
+import './../api/CustomStorage';
+import './__env.tests';
+import { fetchAllPostsEpic } from './../api/Posts.epic';
 var mocha = require('mocha');
 var sinon = require('sinon');
 var Rx = require('rxjs');
@@ -6,7 +9,7 @@ const { concat, of, from, ajax } = Rx.Observable;
 const { ActionsObservable } = require('redux-observable');
 const { expect } = require('chai');
 
-const indirect = {
+/*const indirect = {
   call: (fn, ...args) => fn(...args)
 };
 
@@ -25,7 +28,7 @@ const fetchFooEpic = (action$, store, call = indirect.call) =>
           payload: error.xhr.response,
           error: true
         }))
-    );
+    );*/
 
 const expectEpic = (epic, { expected, action, response, callArgs, store }) => {
   const testScheduler = new TestScheduler((actual, expected) => {
@@ -52,23 +55,22 @@ const expectEpic = (epic, { expected, action, response, callArgs, store }) => {
 
 describe('fetchFooEpic', () => {
   it('calls the correct API', () => {
-    const response = { id: 123, name: 'Bilbo' };
+    const response = { posts: [] };
 
-    expectEpic(fetchFooEpic, {
+    expectEpic(fetchAllPostsEpic, {
       expected: ['-a|', {
-        a: { type: 'FETCH_FOO_FULFILLED', payload: response }
+        a: { type: 'FETCH_POSTS_SUCCEDED', payload: response }
       }],
       action: ['(a|)', {
-        a: { type: 'FETCH_FOO', payload: { id: 123 } }
+        a: { type: 'FETCH_POSTS' }
       }],
       response: ['-a|', {
         a: response
-      }],
-      callArgs: [api.fetchFoo, 123]
+      }]
     });
   });
 
-  it('handles errors correctly', () => {
+  /*it('handles errors correctly', () => {
     const response = { message: 'BAD STUFF' };
 
     expectEpic(fetchFooEpic, {
@@ -95,6 +97,6 @@ describe('fetchFooEpic', () => {
       }],
       callArgs: [api.fetchFoo, 123]
     });
-  });
+  });*/
 
 });
