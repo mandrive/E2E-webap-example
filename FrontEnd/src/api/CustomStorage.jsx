@@ -1,5 +1,5 @@
 import root from 'window-or-global'
 
-root.__customStorage = root.__customStorage || {
+root.customStorage = root.customStorage || {
     posts: []
 }

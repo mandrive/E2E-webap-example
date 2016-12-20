@@ -59,7 +59,7 @@ describe('fetchFooEpic', () => {
 
     expectEpic(fetchAllPostsEpic, {
       expected: ['-a|', {
-        a: { type: 'FETCH_POSTS_SUCCEDED', payload: response }
+        a: { type: 'FETCH_POSTS_SUCCEDED', posts: [] }
       }],
       action: ['(a|)', {
         a: { type: 'FETCH_POSTS' }

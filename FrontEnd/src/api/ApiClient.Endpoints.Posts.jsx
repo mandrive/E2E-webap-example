@@ -11,7 +11,6 @@ export default class PostsEndpoint {
         return this.Url + '/' + endpointUrlSuffix();
     }
     getAll() {
-        console.log("GETTING ALL");
         return new Promise((resolve, reject) => {
             resolve(root.customStorage.posts);
         });
