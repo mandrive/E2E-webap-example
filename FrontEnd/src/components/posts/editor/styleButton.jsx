@@ -10,7 +10,7 @@ export default class StyleButton extends React.Component {
         this.props.onToggle(this.props.style);
     }
     render() {
-        let classes = "btn btn-secondary";
+        let classes = "btn btn-secondary style-button";
         if(this.props.active) {
             classes += " is-active"
         }

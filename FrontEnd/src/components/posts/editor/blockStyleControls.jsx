@@ -29,7 +29,7 @@ export default class BlockStyleControls extends React.Component {
             .getBlockForKey(selection.getStartKey())
             .getType();
         return (
-            <div>
+            <div className="block-style-buttons-wrapper">
                 {BLOCK_TYPES.map((type) => {
                     return(
                         <StyleButton

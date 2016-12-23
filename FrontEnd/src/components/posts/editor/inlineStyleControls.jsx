@@ -18,7 +18,7 @@ export default class InlineStyleControls extends React.Component {
     }
     render() {
         const currentStyle = this.props.editorState.getCurrentInlineStyle();
-        return (<div>
+        return (<div className="inline-style-buttons-wrapper">
             {INLINE_STYLES.map((type) => {
                 return (<StyleButton
                 editorState={this.props.editorState}

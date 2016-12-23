@@ -3,13 +3,14 @@ import PostActionBar from './PostActionBar';
 
 export default class PostContainer extends React.Component {
     render() {
+        console.log(this.props.post);
         const { title, content, id } = this.props.post;
         return(
             <div className="post-container">
                 <PostActionBar postId={id} onEdit={this.props.onEdit} onDelete={this.props.onDelete} />
                 <div>
                     <h1>{title}</h1>
-                    <p>{content}</p>
+                    <p dangerouslySetInnerHTML={{__html: content}}></p>
                 </div>
             </div>
         );

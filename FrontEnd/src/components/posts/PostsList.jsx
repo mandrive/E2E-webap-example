@@ -7,6 +7,8 @@ import * as ACTION_CREATORS from './../../actionCreators/ActionCreators';
 export default class PostsList extends React.Component {
     constructor(props) {
         super(props);
+        this.editPostHandler = this.editPostHandler.bind(this);
+        this.deletePostHandler = this.deletePostHandler.bind(this);
     }
     
     editPostHandler(id) {
@@ -18,10 +20,9 @@ export default class PostsList extends React.Component {
     }
 
     render() {
-        const { editPostHandler, deletePostHandler } = this;
         const posts = this.props.posts.map(post => {
             return(
-                <PostContainer key={post.id} post={post} onEdit={editPostHandler.bind(this)} onDelete={deletePostHandler.bind(this)} />
+                <PostContainer key={post.id} post={post} onEdit={this.editPostHandler} onDelete={this.deletePostHandler} />
             );
         });
 

@@ -1,9 +1,40 @@
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
 div.post-editor-wrapper {
-    min-height: 300px;
+    margin-top: 15px;
+    min-height: 50vh;
     border: 1px solid silver;
     padding: 5px;
+    @include border-radius(7px);
 }
 
 .btn.is-active {
         background-color: silver !important;
+}
+
+.btn.style-button {
+    width: 100px;
+    padding: 3px 5px 3px 5px;
+    
+    &:first-of-type {
+        margin-left: 0;
+    }
+
+    &:last-of-type {
+        margin-right: 0;
+    }
+}
+
+.block-style-buttons-wrapper, .inline-style-buttons-wrapper {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.btn-save-full {
+    width: 100%;
 }
