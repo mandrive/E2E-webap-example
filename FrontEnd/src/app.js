@@ -15,6 +15,9 @@ import Application from './components/layout/Application';
 import Home from './components/layout/Home';
 import { Root } from './components/layout/Root';
 
+/*scss loader*/
+require('./styles/main.scss');
+
 const history = syncHistoryWithStore(browserHistory, store);
 
 render(

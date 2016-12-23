@@ -12,7 +12,7 @@ export default class StyleButton extends React.Component {
     render() {
         let classes = "btn btn-secondary";
         if(this.props.active) {
-            classes += " used-style"
+            classes += " is-active"
         }
 
         return (

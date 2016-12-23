@@ -1,9 +1,9 @@
-.used-style {
-    background-color: silver !important;
-}
-
 div.post-editor-wrapper {
     min-height: 300px;
     border: 1px solid silver;
     padding: 5px;
+}
+
+.btn.is-active {
+        background-color: silver !important;
 }

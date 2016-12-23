@@ -30,7 +30,9 @@ module.exports = {
     },
     module: {
         loaders: [
-            { test: /\.jsx?$/, exclude: [/node_modules/, /config/], loaders: ['react-hot-loader/webpack', 'babel'] }
+            { test: /\.jsx?$/, exclude: [/node_modules/, /config/], loaders: ['react-hot-loader/webpack', 'babel'] },
+            { test: /\.scss$/, loaders: ["style-loader", "css-loader", "sass-loader"]
+      }
         ]
     }
 };
