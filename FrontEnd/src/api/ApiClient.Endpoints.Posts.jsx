@@ -23,7 +23,6 @@ export default class PostsEndpoint {
     create(post) {
         return new Promise((resolve, reject) => {
             var newPostId = window.customStorage.posts.length + 1; 
-            debugger;
             window.customStorage.posts.push({
                 ...post,
                 id: newPostId

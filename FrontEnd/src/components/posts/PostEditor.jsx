@@ -3,20 +3,24 @@ import { connect } from 'react-redux';
 import * as ACTION_CREATORS from './../../actionCreators/ActionCreators'
 import {Editor, EditorState, RichUtils, convertToRaw } from 'draft-js';
 import {stateToHTML} from 'draft-js-export-html';
-
+import { stateFromHTML } from 'draft-js-import-html';
 import BlockStyleControls from './editor/blockStyleControls';
 import InlineStyleControls from './editor/inlineStyleControls';
+import isEmpty from 'lodash/isEmpty';
 
-@connect()
+@connect((state, ownProps) => ({
+        loadedPost: state.posts.currentPost
+}))
 export default class PostEditor extends React.Component{
     constructor(props) {
         super(props);
-        this.state = {editorState: EditorState.createEmpty()};
+        this.state = {editorState: EditorState.createEmpty(), title: ''};
         this.onChange = (editorState) => this.setState({editorState});
         this.focus = () => this.refs.editor.focus();
         this.toggleBlockType = this.toggleBlockType.bind(this);
         this.toggleInlineStyle = this.toggleInlineStyle.bind(this);
         this.savePost = this.savePost.bind(this);
+        this.onTitleChange = this.onTitleChange.bind(this);
     }
     toggleBlockType(blockType) {
         this.onChange(
@@ -36,11 +40,28 @@ export default class PostEditor extends React.Component{
     }
     savePost() {
         var htmlEditorContent = stateToHTML(this.state.editorState.getCurrentContent());
-        this.props.dispatch(ACTION_CREATORS.POSTS.addNewPost({content: htmlEditorContent}));
+        this.props.dispatch(ACTION_CREATORS.POSTS.addNewPost({content: htmlEditorContent, title: this.refs.title.value}));
+    }
+    onTitleChange() {
+        this.setState({
+            title: this.refs.title.value
+        })
+    }
+    componentWillMount() {
+        if(this.props.loadedPost && !isEmpty(this.props.loadedPost)) {
+            debugger;
+            this.setState({
+                title: this.props.loadedPost.title,
+                editorState: EditorState.createWithContent(stateFromHTML(this.props.loadedPost.content))
+            })
+        }
     }
     render() {
         return (
             <div>
+                <div className="form-group">
+                    <input type="text" ref="title" onChange={this.onTitleChange} value={this.state.title} className="form-control"></input>
+                </div>
                 <div>
                     <BlockStyleControls onToggle={this.toggleBlockType} editorState={this.state.editorState} />
                     <InlineStyleControls onToggle={this.toggleInlineStyle} editorState={this.state.editorState} />
