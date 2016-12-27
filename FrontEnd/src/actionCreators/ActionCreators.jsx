@@ -1,3 +1,1 @@
-'use strict';
-
-export * as POSTS from './ActionCreators.Posts';
+export * as POSTS from './actionCreators.posts';

@@ -1,9 +1,9 @@
 import configureMockStore from 'redux-mock-store';
 import expect from 'expect';
 import thunk from 'redux-thunk'
-import * as ACTIONCREATORS from  './../actionCreators/ActionCreators';
-import * as ACTIONS from './../actionCreators/Actions';
-import { ApiClient } from './../api/ApiClient';
+import * as ACTIONCREATORS from  './../actionCreators/actionCreators';
+import * as ACTIONS from './../actionCreators/actions';
+import { ApiClient } from './../api/apiClient';
 import 'isomorphic-fetch';
 import nock from 'nock';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as ACTION_CREATORS from './../../actionCreators/ActionCreators'
+import * as ACTION_CREATORS from './../../actionCreators/actionCreators'
 import {Editor, EditorState, RichUtils, convertToRaw } from 'draft-js';
 import {stateToHTML} from 'draft-js-export-html';
 import { stateFromHTML } from 'draft-js-import-html';
@@ -9,6 +9,7 @@ import InlineStyleControls from './editor/inlineStyleControls';
 import isEmpty from 'lodash/isEmpty';
 
 @connect((state, ownProps) => ({
+        postIdFromRoute: ownProps.params.id,
         loadedPost: state.posts.currentPost
 }))
 export default class PostEditor extends React.Component{
@@ -48,8 +49,7 @@ export default class PostEditor extends React.Component{
         })
     }
     componentWillMount() {
-        if(this.props.loadedPost && !isEmpty(this.props.loadedPost)) {
-            debugger;
+        if(this.props.loadedPost && !isEmpty(this.props.loadedPost) && this.props.postIdFromRoute) {
             this.setState({
                 title: this.props.loadedPost.title,
                 editorState: EditorState.createWithContent(stateFromHTML(this.props.loadedPost.content))
@@ -60,7 +60,8 @@ export default class PostEditor extends React.Component{
         return (
             <div>
                 <div className="form-group">
-                    <input type="text" ref="title" onChange={this.onTitleChange} value={this.state.title} className="form-control"></input>
+                    <label htmlFor="title">Title</label>
+                    <input type="text" id="title" ref="title" onChange={this.onTitleChange} value={this.state.title} className="form-control"></input>
                 </div>
                 <div>
                     <BlockStyleControls onToggle={this.toggleBlockType} editorState={this.state.editorState} />

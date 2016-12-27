@@ -1,7 +1,7 @@
-import PostContainer from './PostContainer';
 import React from 'react';
 import { connect } from 'react-redux';
-import * as ACTION_CREATORS from './../../actionCreators/ActionCreators';
+import PostContainer from './postContainer';
+import * as ACTION_CREATORS from './../../actionCreators/actionCreators';
 
 @connect()
 export default class PostsList extends React.Component {

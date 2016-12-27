@@ -1,18 +1,14 @@
 /* Core imports */
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { render } from 'react-dom';
-import { Router, Route, browserHistory, IndexRoute } from 'react-router';
+import { browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
-import { Provider } from 'react-redux';
 import { AppContainer } from 'react-hot-loader';
 
 /* App core redux imports */
 import { store } from './store/store.js';
 
 /* Containers and components imports */
-import Application from './components/layout/Application';
-import Home from './components/layout/Home';
 import { Root } from './components/layout/Root';
 
 /*scss loader*/

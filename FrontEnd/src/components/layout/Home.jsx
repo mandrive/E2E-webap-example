@@ -1,7 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
-import * as ACTION_CREATORS from './../../actionCreators/ActionCreators';
 import PostsList from './../posts/postsList';
 
 @connect(state => ({ posts: state.posts.posts}))

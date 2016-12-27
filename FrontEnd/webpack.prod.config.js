@@ -2,8 +2,8 @@ var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
-    debug: true,
-    devtool: '#eval-source-map',
+    debug: false,
+    devtool: 'cheap-module-source-map',
     entry: [
         'react-hot-loader/patch',
         'whatwg-fetch',
@@ -19,9 +19,13 @@ module.exports = {
 
     plugins: [
         new webpack.optimize.OccurenceOrderPlugin(),
-        new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
-        new webpack.optimize.DedupePlugin()
+        new webpack.optimize.DedupePlugin(),
+        new webpack.DefinePlugin({
+            'process.env': {
+                'NODE_ENV': JSON.stringify('production')
+        }
+  })
     ],
     resolve:
     {

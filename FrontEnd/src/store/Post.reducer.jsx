@@ -1,4 +1,4 @@
-import * as ACTIONS from './../actionCreators/Actions'
+import * as ACTIONS from './../actionCreators/actions'
 
 let initialState = {
   fetchingPostsInProgress: false,

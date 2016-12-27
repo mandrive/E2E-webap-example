@@ -1,7 +1,7 @@
 import * as Rx from 'rxjs';
-import { ApiClient } from './ApiClient';
-import * as ACTION_CREATORS from './../actionCreators/ActionCreators';
-import * as ACTIONS from './../actionCreators/Actions';
+import { ApiClient } from './apiClient';
+import * as ACTION_CREATORS from './../actionCreators/actionCreators';
+import * as ACTIONS from './../actionCreators/actions';
 
 const apiClient = new ApiClient(window.__env.apiUrl);
 

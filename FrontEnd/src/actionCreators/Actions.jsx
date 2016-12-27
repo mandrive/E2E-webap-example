@@ -1,1 +1,1 @@
-export * as POSTS from './Actions.Posts';
+export * as POSTS from './actions.posts';

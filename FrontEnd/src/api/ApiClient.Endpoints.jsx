@@ -1,4 +1,4 @@
-import PostsEndpoint from './ApiClient.Endpoints.Posts';
+import PostsEndpoint from './apiClient.Endpoints.Posts';
 
 export default class Endpoints {
     constructor(url) {

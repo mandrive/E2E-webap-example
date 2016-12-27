@@ -6,7 +6,7 @@ import { browserHistory } from 'react-router';
 import { routerMiddleware } from 'react-router-redux';
 
 import { fetchAllPostsEpic, addNewPostEpic, selectPostToEditEpic, updatePostEpic, deletePostEpic } from './../api/Posts.epic';
-import { RootReducer } from './Root.reducer';
+import { RootReducer } from './root.reducer';
 
 const logger = createLogger();
 const routerMid = routerMiddleware(browserHistory);
@@ -18,6 +18,7 @@ export const rootEpic = combineEpics(
   updatePostEpic,
   deletePostEpic
 );
+
 const epicMiddleware = createEpicMiddleware(rootEpic);
 
 function configureStore(initialState = {}) {

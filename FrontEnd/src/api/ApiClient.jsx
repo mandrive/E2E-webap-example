@@ -1,5 +1,5 @@
-import Endpoints from './ApiClient.Endpoints';
-import './CustomStorage';
+import Endpoints from './apiClient.endpoints';
+import './customStorage';
 
 export class ApiClient {
     constructor(url) {

@@ -1,7 +1,6 @@
-import { ApiClient } from './../api/ApiClient';
 import { push } from 'react-router-redux';
-import * as ACTIONS from './Actions';
-
+import { ApiClient } from './../api/apiClient';
+import * as ACTIONS from './actions';
 
 /* actions handled by epics */
 

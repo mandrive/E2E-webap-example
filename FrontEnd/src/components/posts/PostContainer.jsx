@@ -1,5 +1,5 @@
 import React from 'react';
-import PostActionBar from './PostActionBar';
+import PostActionBar from './postActionBar';
 
 export default class PostContainer extends React.Component {
     render() {
