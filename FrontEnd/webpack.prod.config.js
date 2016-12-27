@@ -3,12 +3,9 @@ var path = require('path');
 
 module.exports = {
     debug: false,
-    devtool: 'cheap-module-source-map',
+    devtool: 'source-map',
     entry: [
-        'react-hot-loader/patch',
         'whatwg-fetch',
-        'webpack/hot/dev-server',
-        'webpack-hot-middleware/client',
         './src/app.js'
     ],
     output: {
@@ -21,6 +18,7 @@ module.exports = {
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.NoErrorsPlugin(),
         new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.UglifyJsPlugin({minimize: true}),
         new webpack.DefinePlugin({
             'process.env': {
                 'NODE_ENV': JSON.stringify('production')
