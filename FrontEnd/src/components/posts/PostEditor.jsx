@@ -41,7 +41,12 @@ export default class PostEditor extends React.Component{
     }
     savePost() {
         var htmlEditorContent = stateToHTML(this.state.editorState.getCurrentContent());
-        this.props.dispatch(ACTION_CREATORS.POSTS.addNewPost({content: htmlEditorContent, title: this.refs.title.value}));
+        var post = {content: htmlEditorContent, title: this.refs.title.value};
+        if (this.props.postIdFromRoute) {
+            this.props.dispatch(ACTION_CREATORS.POSTS.updatePost(Object.assign({id: this.props.postIdFromRoute}, post)));
+        } else {
+            this.props.dispatch(ACTION_CREATORS.POSTS.addNewPost(post));
+        }
     }
     onTitleChange() {
         this.setState({
